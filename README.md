@@ -6,6 +6,7 @@
 
 To run 
 * node {filename.js}
+* nodemon {filename.js} (loads file on save)
 * open file in the browser e.g.
 
 ```html
@@ -36,3 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 ## TS
 * https://www.typescriptlang.org/
+
+To run
+* tsc {filename.ts} (outputs filename.js)
+* follow steps from JS section
