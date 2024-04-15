@@ -5,8 +5,8 @@
 * https://eloquentjavascript.net/
 
 To run 
-* node {filename.js}
-* nodemon {filename.js} (loads file on save)
+* `node {filename.js}`
+* `nodemon {filename.js}` (loads file on save)
 * open file in the browser e.g.
 
 ```html
@@ -39,5 +39,5 @@ document.addEventListener("DOMContentLoaded", function() {
 * https://www.typescriptlang.org/
 
 To run
-* tsc {filename.ts} (outputs filename.js)
-* follow steps from JS section
+* `tsc {filename.ts}` (outputs filename.js) (see JS section)
+* `npm install --save-dev ts-node nodemon` allowing you to use `nodemon {filename.js}`
