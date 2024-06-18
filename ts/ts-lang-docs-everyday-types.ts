@@ -210,7 +210,7 @@ type Cat2 = Animal & {
     sleeping: Boolean
 }
 
-//an interface can also be updated after creation as follows
+// an interface can also be updated after creation as follows
 
 interface Foo {
     foo: string

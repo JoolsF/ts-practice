@@ -18,13 +18,51 @@ function padLeft(padding: number | string, input: string): string {
 
 console.log(padLeft(0, "julian"))
 
-// Beware the null is "object" 
+/*
+    'In' operator narrowing
+*/
 
-// function printAll(strs: string | string[] | null) {
-//     if(typeof strs === "object") {
-//         for (const s of strs) { // typescript will hard you here that type is only narrowed to string[] | null
-//           ...
-//         }
-//     }
-// }
+type Fish = {
+    swim: "swimming"
+}
 
+type Bird = {
+    fly: "flying"
+}
+
+function move(animal: Fish | Bird) {
+    if ("swim" in animal) {
+        animal.swim
+    } else {
+        animal.fly
+    }
+}
+
+
+/*
+    'instanceof' narrowing
+*/
+function logValue(x: Date | string) {
+    if (x instanceof Date) {
+        console.log(x.toUTCString());
+    } else {
+        console.log(x.toUpperCase());
+    }
+}
+
+
+/*
+  Assignment
+*/
+
+let x: string | number;
+
+x = 1
+const a: number = x // x changes to a number here
+
+x = "string"
+const b: string = x // but we can still assign a string because it is the 'declared' type that is important
+
+
+//TODO START HERE
+// https://www.typescriptlang.org/docs/handbook/2/narrowing.html#control-flow-analysis

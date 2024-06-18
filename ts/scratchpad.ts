@@ -1,6 +1,3 @@
-const a: number[] = [1, 2, 3, 4, 5, 6, 7]
-for (let i = 0; i < 20; i++) {
-
-    console.log(i)
-    
-}
+const d = new Date(`2024-01-01`)
+console.log(d)
+console.log(d.toDateString())
