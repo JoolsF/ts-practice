@@ -41,3 +41,10 @@ document.addEventListener("DOMContentLoaded", function() {
 To run
 * `tsc {filename.ts}` (outputs filename.js) (see JS section)
 * `npm install --save-dev ts-node nodemon` allowing you to use `nodemon {filename.js}`
+
+
+## START HERE
+ts-langs-docs-narrowing.ts
+https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions
+
+
