@@ -24,6 +24,7 @@ console.log(padLeft(0, "julian"))
 
 type Fish = {
     swim: "swimming"
+    name: string
 }
 
 type Bird = {
@@ -64,5 +65,55 @@ x = "string"
 const b: string = x // but we can still assign a string because it is the 'declared' type that is important
 
 
-//TODO START HERE
-// https://www.typescriptlang.org/docs/handbook/2/narrowing.html#control-flow-analysis
+/*
+    Control flow analysis
+
+    This analysis of code based on reachability is called control flow analysis, and TypeScript uses this flow analysis to narrow types as it encounters type guards and assignments
+*/
+
+//
+function example() {
+    let x: string | number | boolean;
+
+    x = Math.random() < 0.5; // string | number | boolean;
+
+    console.log(x); // boolean
+
+
+
+    if (Math.random() < 0.5) { // boolean
+        x = "hello"; // Even though x is boolean above, assignability is always checked against the declared type
+        console.log(x); // string
+
+
+    } else {
+        x = 100;
+        console.log(x); // number
+
+
+    }
+
+    return x; // string | number
+
+
+}
+
+/*
+  Type predicate
+*/
+
+
+// When using this in an if statement e.g. if(isFish(pet)) the else branch will know it's a bird
+
+function isFish(pet: Fish | Bird): pet is Fish {
+    return (pet as Fish).swim !== undefined
+}
+
+const pet: (Fish | Bird)[] = [{ swim: "swimming", name: "flipper" }, { fly: "flying" }, { fly: "flying" }, { fly: "flying" }]
+
+pet.filter(isFish)
+
+/*
+ Discriminated unions
+
+*/
