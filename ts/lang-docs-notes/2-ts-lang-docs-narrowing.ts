@@ -115,5 +115,4 @@ pet.filter(isFish)
 
 /*
  Discriminated unions
-
 */

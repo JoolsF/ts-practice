@@ -39,12 +39,15 @@ document.addEventListener("DOMContentLoaded", function() {
 * https://www.typescriptlang.org/
 
 To run
-* `tsc {filename.ts}` (outputs filename.js) (see JS section)
-* `npm install --save-dev ts-node nodemon` allowing you to use `nodemon {filename.js}`
-
-
-## START HERE
-ts-langs-docs-narrowing.ts
-https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions
-
-
+* Install ts-node as dev dep 
+    ```bash
+    npm install ts-node-dev --save-dev
+    ```
+* Run 
+    ```bash 
+    npx ts-node scratchpad.ts 
+    ```
+* Run repl 
+    ```bash
+    npx ts-node
+    ```
