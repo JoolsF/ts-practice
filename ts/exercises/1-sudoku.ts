@@ -26,52 +26,29 @@ class SmallSquare {
         return this.numbers.slice(6, 9)
     }
 
-
-
 }
 
 class Grid {
     squares: SmallSquare[]
 
-    // Grid row is a row of three squares
 
-    // Grid row 1
-    rowOne() {
-        return this.squares.slice(0,3).map(s => s.sqRowOne())
-    }
+    row(n: number) {
+        let sq: SmallSquare[]
 
-    rowTwo() {
-        return this.squares.slice(0,3).map(s => s.sqRowTwo())
-    }
+        //TODO improve this
+        if (n < 4) {
+            sq = this.squares.slice(0, 3)
+        } else if (n < 7) {
+            sq = this.squares.slice(3, 6)
+        } else {
+            sq = this.squares.slice(6, 9)
+        }
 
-    rowThree() {
-        return this.squares.slice(0,3).map(s => s.sqRowThree())
-    }
-    
-    // Grid row 2
-    rowFour() {
-        return this.squares.slice(3,6).map(s => s.sqRowOne())
-    }
-
-    rowFive() {
-        return this.squares.slice(3,6).map(s => s.sqRowTwo())
-    }
-
-    rowSix() {
-        return this.squares.slice(3,6).map(s => s.sqRowThree())
-    }
-
-    // Grid row 3
-    rowSeven() {
-        return this.squares.slice(6,9).map(s => s.sqRowOne())
-    }
-
-    rowEight() {
-        return this.squares.slice(6,9).map(s => s.sqRowTwo())
-    }
-
-    rowNine() {
-        return this.squares.slice(6,9).map(s => s.sqRowThree())
+        switch (n % 3) {
+            case 1: return sq.map(s => s.sqRowOne());
+            case 2: return sq.map(s => s.sqRowTwo())
+            case 0: return sq.map(s => s.sqRowThree())
+        }
     }
 
 
@@ -79,20 +56,19 @@ class Grid {
         this.squares = squares
     }
 
-    //TODO WRONG - Top row 
+
     display() {
-       // Grid row one
-        console.log(this.rowOne())
-        console.log(this.rowTwo())
-        console.log(this.rowThree())
+        console.log(this.row(1))
+        console.log(this.row(2))
+        console.log(this.row(3))
         console.log()
-        console.log(this.rowFour())
-        console.log(this.rowFive())
-        console.log(this.rowSix())
+        console.log(this.row(4))
+        console.log(this.row(5))
+        console.log(this.row(6))
         console.log()
-        console.log(this.rowSeven())
-        console.log(this.rowEight())
-        console.log(this.rowNine())
+        console.log(this.row(7))
+        console.log(this.row(8))
+        console.log(this.row(9))
     }
 
 }
@@ -104,15 +80,15 @@ const g: Grid = new Grid(
         new SmallSquare([4, 4, 4, 5, 5, 5, 6, 6, 6]),
         new SmallSquare([7, 7, 7, 8, 8, 8, 9, 9, 9]),
         // MIDDLE ROW
-        new SmallSquare([-1, 7, 7, 8, 8, 8, 9, 9, 9]),
-        new SmallSquare([-2, 4, 4, 5, 5, 5, 6, 6, 6]),
-        new SmallSquare([-3, 1, 1, 2, 2, 2, 3, 3, 3]), 
+        new SmallSquare([8, 7, 7, 8, 8, 8, 9, 9, 9]),
+        new SmallSquare([8, 4, 4, 5, 5, 5, 6, 6, 6]),
+        new SmallSquare([8, 1, 1, 2, 2, 2, 3, 3, 3]),
         // BOTTOM ROW
-        new SmallSquare([-4, 7, 7, 8, 8, 8, 9, 9, 9]),
-        new SmallSquare([-5, 4, 4, 5, 5, 5, 6, 6, 6]),
-        new SmallSquare([-6, 1, 1, 2, 2, 2, 3, 3, 3]),
-        
-        
+        new SmallSquare([9, 7, 7, 8, 8, 8, 9, 9, 9]),
+        new SmallSquare([9, 4, 4, 5, 5, 5, 6, 6, 6]),
+        new SmallSquare([9, 1, 1, 2, 2, 2, 3, 3, 3]),
+
+
 
     ],
 )
