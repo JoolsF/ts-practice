@@ -5,7 +5,7 @@
 
   i.    Implement a 9X9 square made of 9 3X3 boxes.
   ii.   Each horizontal and vertical line in the 9X9 square must contain the numbers 1 to 9 with no repeated numbers.
-  iii.  Each 3X3 box must have no repating numbers
+  iii.  Each 3X3 box must have no repeating numbers
 */
 class SmallSquare {
     numbers: number[]
@@ -14,36 +14,66 @@ class SmallSquare {
         this.numbers = numbers
     }
 
-    rowOne() {
-        return this.numbers.slice(0,3)
-    }
-    
-    rowTwo() {
-        return this.numbers.slice(3,6)
-    }
-    
-    rowThree() {
-        return this.numbers.slice(6,9)
+    sqRowOne() {
+        return this.numbers.slice(0, 3)
     }
 
-    
+    sqRowTwo() {
+        return this.numbers.slice(3, 6)
+    }
+
+    sqRowThree() {
+        return this.numbers.slice(6, 9)
+    }
+
+
 
 }
 
-class BigSquare {
+class Grid {
     squares: SmallSquare[]
 
+    // Grid row is a row of three squares
+
+    // Grid row 1
     rowOne() {
-        return this.squares.slice(0,3).map(s => s.rowOne())
+        return this.squares.slice(0,3).map(s => s.sqRowOne())
+    }
+
+    rowTwo() {
+        return this.squares.slice(0,3).map(s => s.sqRowTwo())
+    }
+
+    rowThree() {
+        return this.squares.slice(0,3).map(s => s.sqRowThree())
     }
     
-    // rowTwo() {
-    //     return this.squares.slice(3,6).map(s => s.numbers)
-    // }
-    
-    // rowThree() {
-    //     return this.squares.slice(6,9).map(s => s.numbers)
-    // }
+    // Grid row 2
+    rowFour() {
+        return this.squares.slice(3,6).map(s => s.sqRowOne())
+    }
+
+    rowFive() {
+        return this.squares.slice(3,6).map(s => s.sqRowTwo())
+    }
+
+    rowSix() {
+        return this.squares.slice(3,6).map(s => s.sqRowThree())
+    }
+
+    // Grid row 3
+    rowSeven() {
+        return this.squares.slice(6,9).map(s => s.sqRowOne())
+    }
+
+    rowEight() {
+        return this.squares.slice(6,9).map(s => s.sqRowTwo())
+    }
+
+    rowNine() {
+        return this.squares.slice(6,9).map(s => s.sqRowThree())
+    }
+
 
     constructor(squares: SmallSquare[]) {
         this.squares = squares
@@ -51,25 +81,41 @@ class BigSquare {
 
     //TODO WRONG - Top row 
     display() {
-        return this.squares.map(s => console.log(`${this.rowOne()}`.trim()))
-        // return this.rowOne()
+       // Grid row one
+        console.log(this.rowOne())
+        console.log(this.rowTwo())
+        console.log(this.rowThree())
+        console.log()
+        console.log(this.rowFour())
+        console.log(this.rowFive())
+        console.log(this.rowSix())
+        console.log()
+        console.log(this.rowSeven())
+        console.log(this.rowEight())
+        console.log(this.rowNine())
     }
 
 }
 
-const bs: BigSquare = new BigSquare(
+const g: Grid = new Grid(
     [
-        new SmallSquare([1,2,3,0,0,0,0,0,0]),
-        new SmallSquare([4,5,6,0,0,0,0,0,0])
-        // new SmallSquare(),
-        // new SmallSquare(),
-        // new SmallSquare(),
-        // new SmallSquare(),
-        // new SmallSquare(),
-        // new SmallSquare(),
-        // new SmallSquare()
+        // TOP ROW
+        new SmallSquare([1, 1, 1, 2, 2, 2, 3, 3, 3]),
+        new SmallSquare([4, 4, 4, 5, 5, 5, 6, 6, 6]),
+        new SmallSquare([7, 7, 7, 8, 8, 8, 9, 9, 9]),
+        // MIDDLE ROW
+        new SmallSquare([-1, 7, 7, 8, 8, 8, 9, 9, 9]),
+        new SmallSquare([-2, 4, 4, 5, 5, 5, 6, 6, 6]),
+        new SmallSquare([-3, 1, 1, 2, 2, 2, 3, 3, 3]), 
+        // BOTTOM ROW
+        new SmallSquare([-4, 7, 7, 8, 8, 8, 9, 9, 9]),
+        new SmallSquare([-5, 4, 4, 5, 5, 5, 6, 6, 6]),
+        new SmallSquare([-6, 1, 1, 2, 2, 2, 3, 3, 3]),
+        
+        
+
     ],
 )
 
 
-bs.display()
+g.display()

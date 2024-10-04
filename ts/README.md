@@ -4,7 +4,7 @@
 To run
 * Install ts-node as dev dep 
     ```bash
-    npm install ts-node-dev --save-dev
+    yarn install ts-node-dev --save-dev
     ```
 * Run 
     ```bash 
