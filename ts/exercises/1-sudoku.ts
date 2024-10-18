@@ -28,11 +28,14 @@ class SmallSquare {
 
 }
 
+type gridNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+
+
 class Grid {
     squares: SmallSquare[]
 
 
-    row(n: number) {
+    row(n: gridNumber) {
         let sq: SmallSquare[]
 
         //TODO improve this
@@ -51,13 +54,18 @@ class Grid {
         }
     }
 
+    //TODO start here
+    column(n: gridNumber): SmallSquare {
+        return this.squares[n-1]
+    }
+
 
     constructor(squares: SmallSquare[]) {
         this.squares = squares
     }
 
 
-    display() {
+    displayGame() {
         console.log(this.row(1))
         console.log(this.row(2))
         console.log(this.row(3))
@@ -71,22 +79,26 @@ class Grid {
         console.log(this.row(9))
     }
 
+    displayColumn() {
+        console.log(this.column(1))
+    }
+
 }
 
 const g: Grid = new Grid(
     [
         // TOP ROW
-        new SmallSquare([1, 1, 1, 2, 2, 2, 3, 3, 3]),
-        new SmallSquare([4, 4, 4, 5, 5, 5, 6, 6, 6]),
-        new SmallSquare([7, 7, 7, 8, 8, 8, 9, 9, 9]),
+        new SmallSquare([1, 2, 3, 4, 5, 6, 7, 8, 9]),
+        new SmallSquare([2, 3, 4, 5, 6, 7, 8, 9, 1]),
+        new SmallSquare([3, 4, 5, 6, 7, 8, 9, 1, 2]),
         // MIDDLE ROW
-        new SmallSquare([8, 7, 7, 8, 8, 8, 9, 9, 9]),
-        new SmallSquare([8, 4, 4, 5, 5, 5, 6, 6, 6]),
-        new SmallSquare([8, 1, 1, 2, 2, 2, 3, 3, 3]),
+        new SmallSquare([4, 5, 6, 7, 8, 9, 1, 2, 3]),
+        new SmallSquare([5, 6, 7, 8, 9, 1, 2, 3, 4]),
+        new SmallSquare([6, 7, 8, 9, 1, 2, 3, 4, 5]),
         // BOTTOM ROW
-        new SmallSquare([9, 7, 7, 8, 8, 8, 9, 9, 9]),
-        new SmallSquare([9, 4, 4, 5, 5, 5, 6, 6, 6]),
-        new SmallSquare([9, 1, 1, 2, 2, 2, 3, 3, 3]),
+        new SmallSquare([7, 8, 9, 1, 2, 3, 4, 5, 6]),
+        new SmallSquare([8, 9, 1, 2, 3, 4, 5, 6, 7]),
+        new SmallSquare([9, 1, 2, 3, 4, 5, 6, 7, 8]),
 
 
 
@@ -94,4 +106,5 @@ const g: Grid = new Grid(
 )
 
 
-g.display()
+g.displayGame()
+g.displayColumn()

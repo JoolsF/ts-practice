@@ -1,8 +1,2 @@
-/*
- * Override with Partial
-*/
-
-import { makeSomeType } from "./notes";
-
-  
-  console.log(makeSomeType({ name: "John" }))
+const aa = [1,2,3,4]
+console.log(aa[1])
