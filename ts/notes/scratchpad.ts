@@ -1,2 +1,3 @@
-const aa = [1,2,3,4]
-console.log(aa[1])
+const s = new Set([1,1,2,2,3])
+console.log(s)
+console.log(s.size)

@@ -4,9 +4,9 @@
     "scratchpad-reload": "nodemon --exec \"npx ts-node\" notes/scratchpad.ts"
   },
   "devDependencies": {
-    "nodemon": "^3.1.6",
+    "nodemon": "^3.1.7",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.3"
   },
   "dependencies": {
     "@js-joda/core": "^5.6.3",
