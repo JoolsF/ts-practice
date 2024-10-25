@@ -1,7 +1,8 @@
 {
   "scripts": {
     "scratchpad": "npx ts-node notes/scratchpad.ts",
-    "scratchpad-reload": "nodemon --exec \"npx ts-node\" notes/scratchpad.ts"
+    "scratchpad-reload": "nodemon --exec \"npx ts-node\" notes/scratchpad.ts",
+    "sudoku-reload": "nodemon --exec \"npx ts-node\" exercises/1-sudoku.ts"
   },
   "devDependencies": {
     "nodemon": "^3.1.7",
