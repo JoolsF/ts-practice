@@ -1,3 +1,41 @@
+// HELPERS
+let highest = 0
+function updateHighest(n: number) {
+    n > highest ? highest = n : highest
+}
+// TODO generalise this to produce and range
+// Currently produce value between 1-9
+function randomNumber() {
+    const res = Math.floor(Math.random() * 10)
+    return res === 0 ? 1 : res
+}
+
+// implement array range with Array.from
+function fillArraySequential(n: number) {
+    const array: number[] = []
+    for (let i = 0; i < n; i++) {
+        array.push(i)
+    }
+
+    return array
+}
+
+function shuffleArray<T>(a: T[]): T[] {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1)); // Random index from 0 to i
+        [a[i], a[j]] = [a[j], a[i]]; // Swap elements
+    }
+    return a;
+}
+
+function generateRandomArray() {
+    const a = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    return a.flatMap(_ => shuffleArray(a))
+}
+
+
+//SUDOKU
+
 
 
 type validNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
@@ -9,15 +47,10 @@ class Sudoku {
         this.grid = array;
     }
 
-
-
-
-
     row(n: validNumber) {
         const start = (n - 1) * 9
         return this.grid.slice(start, start + 9)
     }
-
 
     column(n: validNumber) {
         // set limit for start
@@ -72,7 +105,7 @@ class Sudoku {
     }
 
     noDuplicates(a: number[]) {
-        const filtered = a.filter(n => n != - 1)
+        const filtered = a.filter(n => n != undefined)
         return new Set(filtered).size === filtered.length
     }
 
@@ -88,142 +121,99 @@ class Sudoku {
         return validRes;
     }
 
-
-
-
-
 }
-
-// TODO generalise this to produce and range
-// Currently produce value between 1-9
-function randomNumber() {
-    const res = Math.floor(Math.random() * 10)
-    return res === 0 ? 1 : res
-}
-
-// implement array range with Array.from
-function fillArraySequential(n: number) {
-    const array: number[] = []
-    for (let i = 0; i < n; i++) {
-        array.push(i)
-    }
-
-    return array
-}
-
-function shuffleArray<T>(a: T[]): T[] {
-    for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1)); // Random index from 0 to i
-        [a[i], a[j]] = [a[j], a[i]]; // Swap elements
-    }
-    return a;
-}
-
-
-
-
-
-function generateRandomArray() {
-    const a = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    return a.flatMap(_ => shuffleArray(a))
-}
-
-// const input = fillArraySequential(81)
 
 function generateValidSudokuGame() {
 
+    let result: number[] = []
+    let numberAttempt = 0
+    let highestSuccesfulUpdate: number = -1
+    let backtrackIndex = null
 
-    function generate(index: number, a: number[]): Sudoku | null {
-        const updated = [...a]; // Use a copy to avoid mutating the input array
-
-        if (updated.filter(i => i !== -1).length === 81) {
-            return new Sudoku(updated);
-        } else {
-            updated[index] = randomNumber();
-
-            // Recursive tail calls
-            if (new Sudoku(updated).valid()) {
-                console.log(`VALID ${updated.filter(i => i !== -1)}`);
-                return generate(index + 1, updated);
-            } else {
-                return generate(index, a); // Tail call with original array
-            }
-        }
+    function complete() {
+        return result.length === 81
     }
 
-    const start: number[] = Array(81).fill(-1)
-    return generate(0, start)
-
-}
-
-let highest = 0
-function updateHighest(n: number) {
-    n > highest ? highest = n : highest
-}
-function generateValidSudokuGame2() {
-
-    const startArray: number[] = Array(81).fill(-1)
-    let i = 0
-    let numberAttempts = 0
-
-    while (startArray.filter(i => i != -1).length <= 81) {
-        let attemptBefore = [...startArray]
-        let rand = randomNumber()
-
-        attemptBefore[i] = rand
-        if (new Sudoku(attemptBefore).valid()) {
-            // console.log('valid')
-            startArray[i] = rand
-            // console.log(startArray.filter(i => i != -1))
-            startArray[i] = rand
-            numberAttempts = 0
-            i++
+    while (!complete()) {
+        result[result.length] = randomNumber()
+        if (!new Sudoku(result).valid()) {
+            
+            result = result.slice(0, -1) //remove the invalid element to try another
+            numberAttempt++
         } else {
-            // console.log('invalid')
-            // console.log(attemptBefore.filter(i => i != -1))
-            startArray[i] = -1
-            numberAttempts++
-            if (numberAttempts >= 9) {
-                // console.log('fail')
-                updateHighest(startArray.filter(i => i != -1).length)
-                return null
-                
+            // console.log(`valid ${result.filter(i => i != undefined).length} - ${result}`);
+            numberAttempt = 0
+            if (result.length > highestSuccesfulUpdate) {
+                console.log(`${highestSuccesfulUpdate} ${result}`)
+                // Set the furthest point we've got to
+                highestSuccesfulUpdate = result.length
+                // We don't want to back
+                backtrackIndex = null
+                // Backtrack to the backtrackIndex 
+
+            } 
+
+
+        }
+
+        if (numberAttempt >= 9) {
+            // console.log(`backtrackIndex ${backtrackIndex}`)
+            // console.log(`numberAttempt ${numberAttempt}`)
+            // console.log(`highestSuccesfulUpdate ${highestSuccesfulUpdate}`)
+
+            numberAttempt = 0
+            backtrackIndex === null ? backtrackIndex = 0 : 0
+            if(result.length === highestSuccesfulUpdate) {
+                backtrackIndex = backtrackIndex -1 
+                console.log(`backtrack ${backtrackIndex}`)
+            }
+            if (backtrackIndex < 0) {
+                // console.log(`before ${result}`)
+                result = result.slice(0, backtrackIndex)
+                // console.log(`after ${result}`)
             }
 
+
         }
 
     }
-    return startArray
+
+    console.log(`COMPLETE: ${result}`)
+    return result;
+
+
+    // let i = 0
+    // let numberAttempts = 0
+
+    // while (startArray.filter(i => i != -1).length <= 81) {
+    //     let attemptBefore = [...startArray]
+    //     let rand = randomNumber()
+
+    //     attemptBefore[i] = rand
+    //     if (new Sudoku(attemptBefore).valid()) {
+    //         // console.log('valid')
+    //         startArray[i] = rand
+    //         // console.log(startArray.filter(i => i != -1))
+    //         startArray[i] = rand
+    //         numberAttempts = 0
+    //         i++
+    //     } else {
+    //         // console.log('invalid')
+    //         // console.log(attemptBefore.filter(i => i != -1))
+    //         startArray[i] = -1
+    //         numberAttempts++
+    //         if (numberAttempts >= 9) {
+    //             // console.log('fail')
+    //             updateHighest(startArray.filter(i => i != -1).length)
+    //             return null
+
+    //         }
+
+    //     }
+
+    // }
+    // return startArray
 
 }
 
-
-function generate(index: number, a: number[]): Sudoku | null {
-    const updated = [...a]; // Use a copy to avoid mutating the input array
-
-    if (updated.filter(i => i !== -1).length === 81) {
-        return new Sudoku(updated);
-    } else {
-        updated[index] = randomNumber();
-
-        // Recursive tail calls
-        if (new Sudoku(updated).valid()) {
-            console.log(`VALID ${updated.filter(i => i !== -1)}`);
-            return generate(index + 1, updated);
-        } else {
-            return generate(index, a); // Tail call with original array
-        }
-    }
-}
-
-
-
-for (let i = 0; i <= 200000; i++) {
-    console.log(i)
-    const res = generateValidSudokuGame2()
-    if (res) {
-        console.log(`Success after ${i} attempts res ${res}`)
-    }
-}
-
-console.log(`highest ${highest}`)
+console.log(generateValidSudokuGame())
