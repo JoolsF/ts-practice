@@ -156,10 +156,15 @@ function generateValidSudokuGame() {
 
 }
 
+let highest = 0
+function updateHighest(n: number) {
+    n > highest ? highest = n : highest
+}
 function generateValidSudokuGame2() {
 
     const startArray: number[] = Array(81).fill(-1)
     let i = 0
+    let numberAttempts = 0
 
     while (startArray.filter(i => i != -1).length <= 81) {
         let attemptBefore = [...startArray]
@@ -167,18 +172,28 @@ function generateValidSudokuGame2() {
 
         attemptBefore[i] = rand
         if (new Sudoku(attemptBefore).valid()) {
-            console.log('valid')
+            // console.log('valid')
             startArray[i] = rand
-            console.log(startArray.filter(i => i != -1))
+            // console.log(startArray.filter(i => i != -1))
             startArray[i] = rand
+            numberAttempts = 0
             i++
         } else {
-            console.log('invalid')
-            console.log(attemptBefore.filter(i => i != -1))
+            // console.log('invalid')
+            // console.log(attemptBefore.filter(i => i != -1))
+            startArray[i] = -1
+            numberAttempts++
+            if (numberAttempts >= 9) {
+                // console.log('fail')
+                updateHighest(startArray.filter(i => i != -1).length)
+                return null
+                
+            }
 
         }
 
     }
+    return startArray
 
 }
 
@@ -203,5 +218,12 @@ function generate(index: number, a: number[]): Sudoku | null {
 
 
 
-generateValidSudokuGame2()
+for (let i = 0; i <= 200000; i++) {
+    console.log(i)
+    const res = generateValidSudokuGame2()
+    if (res) {
+        console.log(`Success after ${i} attempts res ${res}`)
+    }
+}
 
+console.log(`highest ${highest}`)
