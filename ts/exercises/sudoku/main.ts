@@ -1,8 +1,8 @@
-// HELPERS
-let highest = 0
-function updateHighest(n: number) {
-    n > highest ? highest = n : highest
-}
+// // HELPERS
+// let highest = 0
+// function updateHighest(n: number) {
+//     n > highest ? highest = n : highest
+// }
 // TODO generalise this to produce and range
 // Currently produce value between 1-9
 function randomNumber() {
@@ -30,7 +30,7 @@ function shuffleArray<T>(a: T[]): T[] {
 
 function generateRandomArray() {
     const a = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    return a.flatMap(_ => shuffleArray(a))
+    return a.flatMap(_ => shuffleArray(a))  
 }
 
 
@@ -41,15 +41,15 @@ function generateRandomArray() {
 type validNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 
 class Sudoku {
-    grid: number[]
+    sudokuGrid: number[]
 
     constructor(array: number[]) {
-        this.grid = array;
+        this.sudokuGrid = array;
     }
 
     row(n: validNumber) {
         const start = (n - 1) * 9
-        return this.grid.slice(start, start + 9)
+        return this.sudokuGrid.slice(start, start + 9)
     }
 
     column(n: validNumber) {
@@ -60,7 +60,7 @@ class Sudoku {
 
 
         for (let i = 0; i <= 8; i++) {
-            result.push(this.grid[start + i * 9])
+            result.push(this.sudokuGrid[start + i * 9])
         }
 
         return result;
@@ -100,7 +100,7 @@ class Sudoku {
         }
 
 
-        return indices.map(i => this.grid[i])
+        return indices.map(i => this.sudokuGrid[i])
 
     }
 
@@ -121,6 +121,30 @@ class Sudoku {
         return validRes;
     }
 
+    printSudokuGrid() {
+        if (this.sudokuGrid.length !== 81) {
+            console.error("Invalid sudoku array. It must contain 81 elements.");
+            return;
+        }
+
+        for (let row = 0; row < 9; row++) {
+            let rowString = "";
+
+            for (let col = 0; col < 9; col++) {
+                const value = this.sudokuGrid[row * 9 + col] || "."; // Use "." for empty cells (0 values)
+
+                // Add space between columns and thicker borders after every 3rd column
+                rowString += (col % 3 === 0 ? " | " : " ") + value;
+            }
+
+            // Add row to the grid and borders after every 3rd row
+            console.log(rowString + " |");
+            if ((row + 1) % 3 === 0 && row !== 8) {
+                console.log("---------+---------+---------");
+            }
+        }
+    }
+
 }
 
 function generateValidSudokuGame() {
@@ -135,9 +159,10 @@ function generateValidSudokuGame() {
     }
 
     while (!complete()) {
+    
         result[result.length] = randomNumber()
         if (!new Sudoku(result).valid()) {
-            
+
             result = result.slice(0, -1) //remove the invalid element to try another
             numberAttempt++
         } else {
@@ -151,7 +176,7 @@ function generateValidSudokuGame() {
                 backtrackIndex = null
                 // Backtrack to the backtrackIndex 
 
-            } 
+            }
 
 
         }
@@ -163,8 +188,8 @@ function generateValidSudokuGame() {
 
             numberAttempt = 0
             backtrackIndex === null ? backtrackIndex = 0 : 0
-            if(result.length === highestSuccesfulUpdate) {
-                backtrackIndex = backtrackIndex -1 
+            if (result.length === highestSuccesfulUpdate) {
+                backtrackIndex = backtrackIndex - 1
                 console.log(`backtrack ${backtrackIndex}`)
             }
             if (backtrackIndex < 0) {
@@ -182,38 +207,8 @@ function generateValidSudokuGame() {
     return result;
 
 
-    // let i = 0
-    // let numberAttempts = 0
-
-    // while (startArray.filter(i => i != -1).length <= 81) {
-    //     let attemptBefore = [...startArray]
-    //     let rand = randomNumber()
-
-    //     attemptBefore[i] = rand
-    //     if (new Sudoku(attemptBefore).valid()) {
-    //         // console.log('valid')
-    //         startArray[i] = rand
-    //         // console.log(startArray.filter(i => i != -1))
-    //         startArray[i] = rand
-    //         numberAttempts = 0
-    //         i++
-    //     } else {
-    //         // console.log('invalid')
-    //         // console.log(attemptBefore.filter(i => i != -1))
-    //         startArray[i] = -1
-    //         numberAttempts++
-    //         if (numberAttempts >= 9) {
-    //             // console.log('fail')
-    //             updateHighest(startArray.filter(i => i != -1).length)
-    //             return null
-
-    //         }
-
-    //     }
-
-    // }
-    // return startArray
-
 }
 
-console.log(generateValidSudokuGame())
+const game = new Sudoku(generateValidSudokuGame())
+game.printSudokuGrid()
+

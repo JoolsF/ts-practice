@@ -3,6 +3,7 @@
         "strict": true, // this toggle all options on
         // "noImplicitAny": true, // errors for any type implicitly inferred as any
         // "strictNullChecks": true
-        "target": "ES2019"
+        "target": "ES2019",
+        "moduleResolution":"node"
     }
 }

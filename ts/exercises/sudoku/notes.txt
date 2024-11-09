@@ -1,3 +1,10 @@
+TODO
+******
+1. Refactor and unit test
+2. Improve efficiency of code
+3. Persist saved valid grids
+
+
 Approaches to random sudoku game generation
 ********************************************
 
