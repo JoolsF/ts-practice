@@ -41,7 +41,7 @@ function processNumbers(nums: number[]) {
 
 /*
  * Override with Partial
-*/
+ */
 type SomeType = {
   name: string,
   age: number
@@ -54,3 +54,22 @@ export function makeSomeType(t?: Partial<SomeType>) {
     ...t
   }
 }
+
+/*
+ *  Method overloading 
+ */
+
+class Greeter {
+  greet(person: string): string;
+  greet(persons: string[]): string;
+
+  greet(person: unknown) {
+    if (typeof person === "string") {
+      return `Hello ${person}!`;
+    } else if (Array.isArray(person)) {
+      return person.map((name) => `Hello ${name}!`).join("\n");
+    }
+    return "";
+  }
+}
+
