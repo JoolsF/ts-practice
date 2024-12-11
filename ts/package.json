@@ -2,12 +2,14 @@
   "scripts": {
     "scratchpad": "npx ts-node notes/scratchpad.ts",
     "scratchpad-reload": "nodemon --exec \"npx ts-node\" notes/scratchpad.ts",
-    "sudoku-reload": "nodemon --exec \"npx ts-node\" exercises/1-sudoku.ts"
+    "sudoku-reload": "nodemon --exec \"npx ts-node\" exercises/sudoku/main.ts",
+    "test": "vitest"
   },
   "devDependencies": {
     "nodemon": "^3.1.7",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.4"
   },
   "dependencies": {
     "@js-joda/core": "^5.6.3",
