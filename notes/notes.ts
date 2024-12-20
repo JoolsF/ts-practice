@@ -63,13 +63,13 @@ class Greeter {
   greet(person: string): string;
   greet(persons: string[]): string;
 
-  greet(person: unknown) {
-    if (typeof person === "string") {
-      return `Hello ${person}!`;
-    } else if (Array.isArray(person)) {
-      return person.map((name) => `Hello ${name}!`).join("\n");
-    }
-    return "";
-  }
+  // greet(person: unknown) {
+  //   if (typeof person === "number") {
+  //     return `Hello ${person}!`;
+  //   } else if (Array.isArray(person)) {
+  //     return person.map((name) => `Hello ${name}!`).join("\n");
+  //   }
+  //   return "";
+  // }
 }
 
