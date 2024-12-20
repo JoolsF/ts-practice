@@ -77,9 +77,8 @@ class Sudoku {
         const validColumns = oneToNine.map(i => this.noDuplicates(this.column(i))).reduce((previous, current) => previous && current)
         const validRows = oneToNine.map(i => this.noDuplicates(this.row(i))).reduce((previous, current) => previous && current)
         const validSquares = oneToNine.map(i => this.noDuplicates(this.square(i))).reduce((previous, current) => previous && current)
-
         const validRes = validRows && validColumns && validSquares
-        // if (!validRes) console.error(`validColumns: ${validColumns}, validRows: ${validRows}, validSquares: ${validSquares}`)
+        
         return validRes;
     }
 
@@ -144,10 +143,6 @@ function generateValidSudokuGame() {
         }
 
         if (numberAttempt >= 9) {
-            // console.log(`backtrackIndex ${backtrackIndex}`)
-            // console.log(`numberAttempt ${numberAttempt}`)
-            // console.log(`highestSuccesfulUpdate ${highestSuccesfulUpdate}`)
-
             numberAttempt = 0
             backtrackIndex === null ? backtrackIndex = 0 : 0
             if (result.length === highestSuccesfulUpdate) {
@@ -155,14 +150,9 @@ function generateValidSudokuGame() {
                 console.log(`backtrack ${backtrackIndex}`)
             }
             if (backtrackIndex < 0) {
-                // console.log(`before ${result}`)
                 result = result.slice(0, backtrackIndex)
-                // console.log(`after ${result}`)
             }
-
-
         }
-
     }
 
     console.log(`COMPLETE: ${result}`)

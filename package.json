@@ -2,7 +2,7 @@
   "scripts": {
     "scratchpad": "npx ts-node notes/scratchpad.ts",
     "scratchpad-reload": "nodemon --exec \"npx ts-node\" notes/scratchpad.ts",
-    "sudoku-reload": "nodemon --exec \"npx ts-node\" exercises/sudoku/main.ts",
+    "sudoku-reload": "nodemon --exec \"npx ts-node\" programs/sudoku/main.ts",
     "test": "vitest"
   },
   "devDependencies": {
