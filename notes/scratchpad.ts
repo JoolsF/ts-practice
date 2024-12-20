@@ -1,27 +1,43 @@
 // Typescript pass by value vs pass by reference examples
 
-// Pritive types are passed by value
-let i = 0
-function increment(value: number): void {
-  value++
-}
-console.log(i) // 0
-increment(i)
-console.log(i) //0
+import { log, logLineBreak } from "../utils/logger";
 
-
-// objects are passed by reference
-const obj = { value: 0 }
-function updateObject(obj: { value: number }): void {
-  obj.value++
+// Primitive types are passed by value
+let i = 0;
+function increment(param: number): void {
+  log("param before", param);
+  param++;
+  console.log("param after", param);
 }
 
-// const arr =  Array()
+log(`i before`, i); // 0
+increment(i);
+log(`i after`, i); // 0
 
-// function addToArray(value: string, array: Array<string>): void {
-//   array.push(value)
-// }
+logLineBreak();
 
-// console.log(arr)
-// addToArray("hello", arr)
-// console.log(arr)
+// Objects are passed by reference
+const myObj = { value: 0 };
+function updateObject(param: { value: number }): void {
+  log("param before", param);
+  param.value++;
+  log("param after", param);
+}
+
+log(`myObj before`, myObj); // 0
+updateObject(myObj);
+log(`myObj after`, myObj); // 1
+logLineBreak();
+
+// Arrays are passed by reference
+const arr = Array();
+
+function addToArray(value: string, param: Array<string>): void {
+  log("param before", param); // []
+  param.push(value);
+  log("param after", param); // ["1"]
+}
+
+log(`myObj before`, arr); // []
+addToArray("1", arr);
+log(`myObj after`, arr); // ["1"]
