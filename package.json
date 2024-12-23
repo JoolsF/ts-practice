@@ -3,6 +3,7 @@
     "scratchpad": "npx ts-node notes/scratchpad.ts",
     "scratchpad-reload": "nodemon --exec \"npx ts-node\" notes/scratchpad.ts",
     "sudoku-reload": "nodemon --exec \"npx ts-node\" programs/sudoku/main.ts",
+    "euler-reload": "nodemon --exec \"npx ts-node\" programs/project-euler/main.ts",
     "test": "vitest"
   },
   "devDependencies": {
