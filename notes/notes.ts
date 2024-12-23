@@ -1,3 +1,5 @@
+export {};  // Turn a file with any imports or exports into a module
+
 /*
     Depedency Injection using classes
 */
@@ -34,8 +36,6 @@ function processNumbers(nums: number[]) {
   } else {
     console.log('end')
   }
-
-
 }
 
 
