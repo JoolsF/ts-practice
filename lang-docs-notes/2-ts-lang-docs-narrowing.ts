@@ -21,8 +21,8 @@ function padLeft(padding: number | string, input: string): string {
 console.log(padLeft(0, "julian"));
 
 /*
-    'In' operator narrowing
-  */
+  'In' operator narrowing
+*/
 
 type Fish = {
   swim: "swimming";
@@ -43,7 +43,7 @@ function move(animal: Fish | Bird) {
 
 /*
     'instanceof' narrowing
-  */
+*/
 function logValue(x: Date | string) {
   if (x instanceof Date) {
     console.log(x.toUTCString());
@@ -53,8 +53,8 @@ function logValue(x: Date | string) {
 }
 
 /*
-   Assignment
-  */
+  Assignment
+*/
 
 let x: string | number;
 
@@ -65,11 +65,11 @@ x = "string";
 const b: string = x; // but we can still assign a string because it is the 'declared' type that is important
 
 /*
-    Control flow analysis
+  Control flow analysis
 
-    This analysis of code based on reachability is called control flow analysis, and TypeScript uses this flow analysis to narrow types 
-    as it encounters type guards and assignments
-  */
+  This analysis of code based on reachability is called control flow analysis, and TypeScript uses this flow analysis to narrow types 
+  as it encounters type guards and assignments
+*/
 
 //
 function example() {
@@ -93,7 +93,7 @@ function example() {
 
 /*
    Type predicate
-  */
+*/
 
 // When using this in an if statement e.g. if(isFish(pet)) the else branch will know it's a bird
 
@@ -111,10 +111,10 @@ const pet: (Fish | Bird)[] = [
 pet.filter(isFish);
 
 /*
-    Discriminated unions
+  Discriminated unions
 
-    Use a property common to every type in the union to narrow the type
-  */
+  Use a property common to every type in the union to narrow the type
+*/
 
 type Dog = {
   kind: "dog";

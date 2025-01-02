@@ -6,7 +6,7 @@ export {};
 */
 
 /*
-    Function type expressions
+  Function type expressions
 */
 type GreetFunction = (a: string) => void;
 
@@ -21,7 +21,7 @@ function printToConsole(s: string) {
 greeter(printToConsole);
 
 /*
-    Call signatures
+  Call signatures
 */
 
 type DescribableFunction = {
@@ -36,7 +36,7 @@ function myFunc(n: number): boolean {
   return n > 3;
 }
 
-myFunc.description = "default description"; // In TS and JS function are object and can have properties
+myFunc.description = "default description"; // In TS and JS functions are objects and can have properties
 
 doSomething(myFunc);
 
