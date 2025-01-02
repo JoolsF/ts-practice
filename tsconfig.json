@@ -2,7 +2,7 @@
     "compilerOptions": {
         "strict": true, // this toggle all options on
         // "noImplicitAny": true, // errors for any type implicitly inferred as any
-        // "strictNullChecks": true
+        "strictNullChecks": true,
         "target": "ES2020",
         "moduleResolution":"node"
     }

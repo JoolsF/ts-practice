@@ -1,3 +1,4 @@
 ## START HERE
-ts-langs-docs-narrowing.ts
+4-object-types.ts
 https://www.typescriptlang.org/docs/handbook/2/objects.html
+
