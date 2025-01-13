@@ -119,4 +119,9 @@ for (let i = 0; i <= 100000; i++) {
   }
 }
 
-export const problem3Result = JSON.stringify(primes)
+/*
+  If the number n is even, then the largest possible prime factor would be ( (n / 2) -1 )
+
+  And then you iterate backwards through primes from that starting point looking for the first that divides n
+*/
+// export const problem3Result = JSON.stringify(primes)
