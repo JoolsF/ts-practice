@@ -1,5 +1,13 @@
 import { randomNumber } from "../random/random--value-generator";
 
+// TODO 
+// This is a naive, inefficient approach using a brute force method of generating a sudoku board
+// and may have several bugs where it never terminates.
+// 
+// 1. Write unit tests covering the current cases
+// 2. Further refactor into simpler components
+// 3. Refactor and simplify methods
+// 4. Debug and improve efficiency
 type validNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 
 class Sudoku {
