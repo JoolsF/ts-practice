@@ -7,6 +7,8 @@
 
 */
 
+import { getRunningMode } from "vitest";
+
 const multipleOf3or5 = (n: number) => n % 3 === 0 || n % 5 === 0;
 export let problem1Result: number = 0;
 
@@ -112,16 +114,25 @@ function isPrime(n: number) {
   return true;
 }
 
-let primes: number[] = [];
-for (let i = 0; i <= 100000; i++) {
-  if (isPrime(i)) {
-    primes.push(i);
+function largestPrimeFactor(n: number): number {
+  const nIsEven = n % 2 === 0;
+  const startAt1 = nIsEven ? n / 2 : n / 3;
+  const startAt2 = startAt1 % 2 === 0 ? startAt1 - 1 : startAt1; // always start on an odd number, no point in checking even
+
+  for (let i = startAt2; i > 0; i -= 2) {
+    if (isPrime(i)) {
+      if (Number.isInteger(n / i)) {
+        return i;
+      }
+    }
   }
+  return -1;
 }
 
 /*
   If the number n is even, then the largest possible prime factor would be ( (n / 2) -1 )
 
   And then you iterate backwards through primes from that starting point looking for the first that divides n
+
 */
-// export const problem3Result = JSON.stringify(primes)
+export const problem3Result = JSON.stringify(largestPrimeFactor(796));
