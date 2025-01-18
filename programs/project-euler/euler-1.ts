@@ -99,21 +99,25 @@ export const problem2Result = problem2Generator();
  https://projecteuler.net/problem=3
 */
 
-function isPrime(n: number) {
-  if (n === 0 || n === 1) {
-    return false;
-  }
-  let currentDivisor = n - 1;
-  while (currentDivisor > 1) {
-    const isdivisibleByCurrentDivisor = Number.isInteger(n / currentDivisor);
-    if (isdivisibleByCurrentDivisor) {
+function isPrime(n: number): boolean {
+  if (n <= 1) return false; // 0 and 1 are not prime numbers
+  if (n <= 3) return true;  // 2 and 3 are prime numbers
+  if (n % 2 === 0 || n % 3 === 0) return false; // eliminate multiples of 2 and 3
+
+  // Check for factors from 5 to the square root of n, skipping even numbers and multiples of 3
+  for (let i = 5; i * i <= n; i += 6) {
+    if (n % i === 0 || n % (i + 2) === 0) {
       return false;
     }
-    currentDivisor--;
   }
   return true;
 }
 
+/*
+ TODO 
+ factor out 2s and 3s
+ increment up to sqrt of n
+*/
 function largestPrimeFactor(n: number): number {
   const nIsEven = n % 2 === 0;
   const startAt1 = nIsEven ? n / 2 : n / 3;
@@ -129,10 +133,4 @@ function largestPrimeFactor(n: number): number {
   return -1;
 }
 
-/*
-  If the number n is even, then the largest possible prime factor would be ( (n / 2) -1 )
-
-  And then you iterate backwards through primes from that starting point looking for the first that divides n
-
-*/
-export const problem3Result = JSON.stringify(largestPrimeFactor(390));
+export const problem3Result = JSON.stringify(largestPrimeFactor(9980000000));
