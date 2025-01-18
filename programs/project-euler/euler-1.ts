@@ -101,7 +101,7 @@ export const problem2Result = problem2Generator();
 
 function isPrime(n: number): boolean {
   if (n <= 1) return false; // 0 and 1 are not prime numbers
-  if (n <= 3) return true;  // 2 and 3 are prime numbers
+  if (n <= 3) return true; // 2 and 3 are prime numbers
   if (n % 2 === 0 || n % 3 === 0) return false; // eliminate multiples of 2 and 3
 
   // Check for factors from 5 to the square root of n, skipping even numbers and multiples of 3
@@ -119,14 +119,16 @@ function isPrime(n: number): boolean {
  increment up to sqrt of n
 */
 function largestPrimeFactor(n: number): number {
-  const nIsEven = n % 2 === 0;
-  const startAt1 = nIsEven ? n / 2 : n / 3;
-  const startAt2 = Math.floor(startAt1 % 2 === 0 ? startAt1 - 1 : startAt1); // always start on an odd number, no point in checking even
+  // const nIsEven = n % 2 === 0;
+  // const startAt1 = nIsEven ? n / 2 : n / 3;
+  // const startAt2 = Math.floor(startAt1 % 2 === 0 ? startAt1 - 1 : startAt1); // always start on an odd number, no point in checking even
 
-  for (let i = startAt2; i > 0; i -= 2) {
-    if (isPrime(i)) {
-      if (Number.isInteger(n / i)) {
-        return i;
+  for (let i = 5; i < Math.sqrt(n); i++) {
+    if (!((n % 2 === 0) || (n % 3 === 0))) {
+      if (isPrime(i)) {
+        if (Number.isInteger(n / i)) {
+          return i;
+        }
       }
     }
   }
