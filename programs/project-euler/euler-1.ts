@@ -117,7 +117,7 @@ function isPrime(n: number) {
 function largestPrimeFactor(n: number): number {
   const nIsEven = n % 2 === 0;
   const startAt1 = nIsEven ? n / 2 : n / 3;
-  const startAt2 = startAt1 % 2 === 0 ? startAt1 - 1 : startAt1; // always start on an odd number, no point in checking even
+  const startAt2 = Math.floor(startAt1 % 2 === 0 ? startAt1 - 1 : startAt1); // always start on an odd number, no point in checking even
 
   for (let i = startAt2; i > 0; i -= 2) {
     if (isPrime(i)) {
@@ -135,4 +135,4 @@ function largestPrimeFactor(n: number): number {
   And then you iterate backwards through primes from that starting point looking for the first that divides n
 
 */
-export const problem3Result = JSON.stringify(largestPrimeFactor(796));
+export const problem3Result = JSON.stringify(largestPrimeFactor(390));
