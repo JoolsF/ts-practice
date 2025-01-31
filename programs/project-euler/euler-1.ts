@@ -99,6 +99,8 @@ export const problem2Result = problem2Generator();
  https://projecteuler.net/problem=3
 */
 
+// TODO Runs efficiently for the number given but has bugs / inefficienices to fix
+
 function isPrime(n: number): boolean {
   if (n <= 1) return false; // 0 and 1 are not prime numbers
   if (n <= 3) return true; // 2 and 3 are prime numbers
@@ -135,51 +137,23 @@ function nextPrimeGenerator() {
   };
 }
 
-const nextPrime = nextPrimeGenerator();
+function largestPrimeFactor(n: number) {
+  const primes = nextPrimeGenerator();
+  let latestPrimeDivisor: number;
+  let largestPrimeFactorRes: number = -1;
 
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
+  do {
+    latestPrimeDivisor = primes();
+    while (n % latestPrimeDivisor === 0) { // Keep dividing out the prime factor
+      console.log(`n: ${n} | latestPrimeDivisor: ${latestPrimeDivisor} | n / latestPrimeDivisor: ${n / latestPrimeDivisor}`)
+      largestPrimeFactorRes = latestPrimeDivisor;
+      n /= latestPrimeDivisor;
+    }
+  } while (n > 1); // Stop only when n is fully factored
 
-// /*
-//  TODO
-//  factor out 2s and 3s
-//  increment up to sqrt of n
-// */
-// function largestPrimeFactor(n: number): number {
-//   // const nIsEven = n % 2 === 0;
-//   // const startAt1 = nIsEven ? n / 2 : n / 3;
-//   // const startAt2 = Math.floor(startAt1 % 2 === 0 ? startAt1 - 1 : startAt1); // always start on an odd number, no point in checking even
-//   const sqrtN = Math.sqrt(n)
+  return largestPrimeFactorRes;
+}
 
-//   for (let i = 5; i <= sqrtN; i++) {
-//     if (!((n % 2 === 0) || (n % 3 === 0))) {
-//       if (isPrime(i)) {
-//         if (Number.isInteger(n / i)) {
-//           return i;
-//         }
-//       }
-//     }
-//   }
-//   return -1;
-// }
 
-// export const problem3Result = JSON.stringify(largestPrimeFactor(9980000000));
-export const problem3Result = "";
+export const problem3Result = JSON.stringify(largestPrimeFactor(600851475143));
+
