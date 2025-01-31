@@ -113,26 +113,73 @@ function isPrime(n: number): boolean {
   return true;
 }
 
-/*
- TODO 
- factor out 2s and 3s
- increment up to sqrt of n
-*/
-function largestPrimeFactor(n: number): number {
-  // const nIsEven = n % 2 === 0;
-  // const startAt1 = nIsEven ? n / 2 : n / 3;
-  // const startAt2 = Math.floor(startAt1 % 2 === 0 ? startAt1 - 1 : startAt1); // always start on an odd number, no point in checking even
+function nextPrimeGenerator() {
+  let currentCandidate = 2;
 
-  for (let i = 5; i < Math.sqrt(n); i++) {
-    if (!((n % 2 === 0) || (n % 3 === 0))) {
-      if (isPrime(i)) {
-        if (Number.isInteger(n / i)) {
-          return i;
-        }
-      }
+  const loop = (x: number): number => {
+    if (isPrime(x)) {
+      currentCandidate = currentCandidate + 2;
+      return x;
+    } else {
+      return loop((currentCandidate += 2));
     }
-  }
-  return -1;
+  };
+
+  return () => {
+    if (currentCandidate === 2) {
+      currentCandidate = 3
+      return 2;
+    } else {
+      return loop(currentCandidate);
+    }
+  };
 }
 
-export const problem3Result = JSON.stringify(largestPrimeFactor(9980000000));
+const nextPrime = nextPrimeGenerator();
+
+console.log(nextPrime());
+console.log(nextPrime());
+console.log(nextPrime());
+console.log(nextPrime());
+console.log(nextPrime());
+console.log(nextPrime());
+console.log(nextPrime());
+console.log(nextPrime());
+console.log(nextPrime());
+console.log(nextPrime());
+console.log(nextPrime());
+console.log(nextPrime());
+console.log(nextPrime());
+console.log(nextPrime());
+console.log(nextPrime());
+console.log(nextPrime());
+console.log(nextPrime());
+console.log(nextPrime());
+console.log(nextPrime());
+console.log(nextPrime());
+
+// /*
+//  TODO
+//  factor out 2s and 3s
+//  increment up to sqrt of n
+// */
+// function largestPrimeFactor(n: number): number {
+//   // const nIsEven = n % 2 === 0;
+//   // const startAt1 = nIsEven ? n / 2 : n / 3;
+//   // const startAt2 = Math.floor(startAt1 % 2 === 0 ? startAt1 - 1 : startAt1); // always start on an odd number, no point in checking even
+//   const sqrtN = Math.sqrt(n)
+
+//   for (let i = 5; i <= sqrtN; i++) {
+//     if (!((n % 2 === 0) || (n % 3 === 0))) {
+//       if (isPrime(i)) {
+//         if (Number.isInteger(n / i)) {
+//           return i;
+//         }
+//       }
+//     }
+//   }
+//   return -1;
+// }
+
+// export const problem3Result = JSON.stringify(largestPrimeFactor(9980000000));
+export const problem3Result = "";
