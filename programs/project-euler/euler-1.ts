@@ -136,20 +136,22 @@ function nextPrimeGenerator() {
 }
 
 function largestPrimeFactor(n: number) {
-  const primes = nextPrimeGenerator()
-  const max = Math.sqrt(n);
-  let latestPrime: number;
-  let largestPrimeFactorRes: number = -1
+  const primes = nextPrimeGenerator();
+  let latestPrimeDivisor: number;
+  let largestPrimeFactorRes: number = -1;
 
   do {
-    latestPrime = primes();
-    if (Number.isInteger(n / latestPrime)) {
-      largestPrimeFactorRes = latestPrime
+    latestPrimeDivisor = primes();
+    while (n % latestPrimeDivisor === 0) { // Keep dividing out the prime factor
+      console.log(`n: ${n} | latestPrimeDivisor: ${latestPrimeDivisor} | n / latestPrimeDivisor: ${n / latestPrimeDivisor}`)
+      largestPrimeFactorRes = latestPrimeDivisor;
+      n /= latestPrimeDivisor;
     }
-  } while (latestPrime <= max)
+  } while (n > 1); // Stop only when n is fully factored
 
-  return largestPrimeFactorRes
+  return largestPrimeFactorRes;
 }
+
 
 export const problem3Result = JSON.stringify(largestPrimeFactor(600851475143));
 
