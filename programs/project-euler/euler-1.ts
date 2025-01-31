@@ -99,6 +99,8 @@ export const problem2Result = problem2Generator();
  https://projecteuler.net/problem=3
 */
 
+// TODO Runs efficiently for the number given but has bugs / inefficienices to fix
+
 function isPrime(n: number): boolean {
   if (n <= 1) return false; // 0 and 1 are not prime numbers
   if (n <= 3) return true; // 2 and 3 are prime numbers
