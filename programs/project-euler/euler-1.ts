@@ -126,7 +126,6 @@ function nextPrimeGenerator() {
   };
 
   return () => {
-    // console.log(`np ${currentCandidate}`)
     if (currentCandidate === 2) {
       currentCandidate = 3
       return 2;
@@ -137,13 +136,13 @@ function nextPrimeGenerator() {
 }
 
 function largestPrimeFactor(n: number) {
-  const primeGen = nextPrimeGenerator()
-  const max = n / 2
+  const primes = nextPrimeGenerator()
+  const max = Math.sqrt(n);
   let latestPrime: number;
   let largestPrimeFactorRes: number = -1
 
   do {
-    latestPrime = primeGen();
+    latestPrime = primes();
     if (Number.isInteger(n / latestPrime)) {
       largestPrimeFactorRes = latestPrime
     }
@@ -152,5 +151,5 @@ function largestPrimeFactor(n: number) {
   return largestPrimeFactorRes
 }
 
-export const problem3Result = JSON.stringify(largestPrimeFactor(13195));
+export const problem3Result = JSON.stringify(largestPrimeFactor(600851475143));
 
