@@ -126,6 +126,7 @@ function nextPrimeGenerator() {
   };
 
   return () => {
+    // console.log(`np ${currentCandidate}`)
     if (currentCandidate === 2) {
       currentCandidate = 3
       return 2;
@@ -135,51 +136,21 @@ function nextPrimeGenerator() {
   };
 }
 
-const nextPrime = nextPrimeGenerator();
+function largestPrimeFactor(n: number) {
+  const primeGen = nextPrimeGenerator()
+  const max = n / 2
+  let latestPrime: number;
+  let largestPrimeFactorRes: number = -1
 
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
-console.log(nextPrime());
+  do {
+    latestPrime = primeGen();
+    if (Number.isInteger(n / latestPrime)) {
+      largestPrimeFactorRes = latestPrime
+    }
+  } while (latestPrime <= max)
 
-// /*
-//  TODO
-//  factor out 2s and 3s
-//  increment up to sqrt of n
-// */
-// function largestPrimeFactor(n: number): number {
-//   // const nIsEven = n % 2 === 0;
-//   // const startAt1 = nIsEven ? n / 2 : n / 3;
-//   // const startAt2 = Math.floor(startAt1 % 2 === 0 ? startAt1 - 1 : startAt1); // always start on an odd number, no point in checking even
-//   const sqrtN = Math.sqrt(n)
+  return largestPrimeFactorRes
+}
 
-//   for (let i = 5; i <= sqrtN; i++) {
-//     if (!((n % 2 === 0) || (n % 3 === 0))) {
-//       if (isPrime(i)) {
-//         if (Number.isInteger(n / i)) {
-//           return i;
-//         }
-//       }
-//     }
-//   }
-//   return -1;
-// }
+export const problem3Result = JSON.stringify(largestPrimeFactor(13195));
 
-// export const problem3Result = JSON.stringify(largestPrimeFactor(9980000000));
-export const problem3Result = "";
