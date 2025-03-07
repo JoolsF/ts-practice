@@ -178,7 +178,9 @@ function threeDigitProducts(): number[] {
   return Array.from(res);
 }
 
-function isPalindrome(s: string): boolean {
+function isPalindrome(input: number | string): boolean {
+  let s: string = typeof input === "number" ? input.toString() : input;
+  
   let startChar = 0;
   let endChar = s.length - 1;
 
@@ -200,7 +202,7 @@ function isPalindrome(s: string): boolean {
 function largestPalindrome(candidates: number[]) {
   let res: number = 0;
   candidates.some((num: number) => {
-    if (isPalindrome(num.toString())) {
+    if (isPalindrome(num)) {
       res = num;
       return true;
     }
