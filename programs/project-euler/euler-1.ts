@@ -138,17 +138,17 @@ function nextPrimeGenerator() {
 }
 
 function largestPrimeFactor(n: number) {
-  const primes = nextPrimeGenerator();
-  let latestPrimeDivisor: number;
+  const nextPrimeAsc = nextPrimeGenerator();
+  let currentPrimeDivisor: number;
   let largestPrimeFactorRes: number = -1;
 
   do {
-    latestPrimeDivisor = primes();
-    while (n % latestPrimeDivisor === 0) { // Keep dividing out the prime factor
-      console.log(`n: ${n} | latestPrimeDivisor: ${latestPrimeDivisor} | n / latestPrimeDivisor: ${n / latestPrimeDivisor}`)
-      largestPrimeFactorRes = latestPrimeDivisor;
-      n /= latestPrimeDivisor;
+    currentPrimeDivisor = nextPrimeAsc();
+    while (n % currentPrimeDivisor === 0) { // Keep dividing out the prime factor
+      largestPrimeFactorRes = currentPrimeDivisor;
+      n /= currentPrimeDivisor;
     }
+
   } while (n > 1); // Stop only when n is fully factored
 
   return largestPrimeFactorRes;
