@@ -129,7 +129,7 @@ function nextPrimeGenerator() {
 
   return () => {
     if (currentCandidate === 2) {
-      currentCandidate = 3
+      currentCandidate = 3;
       return 2;
     } else {
       return loop(currentCandidate);
@@ -144,16 +144,72 @@ function largestPrimeFactor(n: number) {
 
   do {
     currentPrimeDivisor = nextPrimeAsc();
-    while (n % currentPrimeDivisor === 0) { // Keep dividing out the prime factor
+    while (n % currentPrimeDivisor === 0) {
+      // Keep dividing out the prime factor
       largestPrimeFactorRes = currentPrimeDivisor;
       n /= currentPrimeDivisor;
     }
-
   } while (n > 1); // Stop only when n is fully factored
+
+  nextPrimeAsc();
 
   return largestPrimeFactorRes;
 }
 
-
 export const problem3Result = JSON.stringify(largestPrimeFactor(600851475143));
 
+/*
+Largest Palindrome Product
+A palindromic number reads the same both ways. The largest palindrome made from the product of two -digit numbers is 
+9009 = 91 * 99
+
+Find the largest palindrome made from the product of two 3-digit number
+
+https://projecteuler.net/problem=4
+*/
+
+function threeDigitProducts(): number[] {
+  let res: Set<number> = new Set();
+  for (let i = 1; i < 1000; i++) {
+    for (let j = 1; j < 1000; j++) {
+      res.add(i * j);
+    }
+  }
+  return Array.from(res);
+}
+
+function isPalindrome(s: string): boolean {
+  let startChar = 0;
+  let endChar = s.length - 1;
+
+  const first = s.charAt(startChar);
+  const end = s.charAt(endChar);
+  let match: boolean;
+
+  do {
+    const first = s.charAt(startChar);
+    const end = s.charAt(endChar);
+    match = first === end;
+    startChar++;
+    endChar--;
+  } while (match && startChar <= endChar);
+
+  return match;
+}
+
+function largestPalindrome(candidates: number[]) {
+  let res: number = 0;
+  candidates.some((num: number) => {
+    if (isPalindrome(num.toString())) {
+      res = num;
+      return true;
+    }
+    return false;
+  });
+
+  return res;
+}
+
+const res = largestPalindrome(threeDigitProducts().sort((a, b) => b - a));
+
+export const problem4Result = res;
