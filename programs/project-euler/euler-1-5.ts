@@ -94,6 +94,8 @@ function problem2Generator() {
 export const problem2Result = problem2Generator();
 
 /*
+ Problem 3
+
  Largest prime factor of 600851475143
 
  https://projecteuler.net/problem=3
@@ -159,6 +161,8 @@ function largestPrimeFactor(n: number) {
 export const problem3Result = JSON.stringify(largestPrimeFactor(600851475143));
 
 /*
+Problem 4
+
 Largest Palindrome Product
 A palindromic number reads the same both ways. The largest palindrome made from the product of two -digit numbers is 
 9009 = 91 * 99
@@ -180,7 +184,7 @@ function threeDigitProducts(): number[] {
 
 function isPalindrome(input: number | string): boolean {
   let s: string = typeof input === "number" ? input.toString() : input;
-  
+
   let startChar = 0;
   let endChar = s.length - 1;
 
@@ -212,6 +216,44 @@ function largestPalindrome(candidates: number[]) {
   return res;
 }
 
-const res = largestPalindrome(threeDigitProducts().sort((a, b) => b - a));
+export const problem4Result = largestPalindrome(
+  threeDigitProducts().sort((a, b) => b - a)
+);
 
-export const problem4Result = res;
+/*
+ Problem 5
+ 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+ What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20 
+?
+
+*/
+
+function isDivisibleWithoutRemainder(a: number, b: number): boolean {
+  return a % b === 0;
+}
+
+function isEvenlyDivisibleByAll(n: number, from: number, to: number): boolean {
+  for (let i = from; i <= to; i++) {
+    if (!(n % i === 0)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+export type Euler5Res = { res: number } | "limit_reached";
+
+function smallestEvenlyDivisible(
+  limit: number,
+  from: number,
+  to: number
+): Euler5Res {
+  for (let i = 1; i <= limit; i++) {
+    if (isEvenlyDivisibleByAll(i, from, to)) {
+      return { res: i };
+    }
+  }
+  return "limit_reached";
+}
+
+export const problem5Result = smallestEvenlyDivisible(252000000, 1, 20);
