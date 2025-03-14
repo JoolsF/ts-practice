@@ -118,3 +118,18 @@ function addToArray(value: string, param: Array<string>): void {
 log(`myObj before`, arr); // []
 addToArray("1", arr);
 log(`myObj after`, arr); // ["1"]
+
+
+/**
+ * Creates a lazy range of numbers using a generator.
+ * @param start - The starting number of the range (inclusive).
+ * @param end - The ending number of the range (inclusive).
+ * @returns A generator that yields numbers from start to end.
+ */
+function* lazyRange(start: number, end: number): Generator<number> {
+  for (let i = start; i <= end; i++) {
+      yield i;
+  }
+}
+
+const res = Array.from( {length: 5}, (_, n) => n ** n)
