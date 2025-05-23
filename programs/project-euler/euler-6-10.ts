@@ -11,10 +11,14 @@ Find the difference between the sum of the squares of the first one hundred natu
 
 */
 
-import {rangeMapReduce } from "../../utils/helpers";
+import { rangeMapReduce } from "../../utils/helpers";
 
-export const sumOfSquare = rangeMapReduce(10, (n) => n ** 2, (a,b) => a + b)
-export const sum = rangeMapReduce(10, (n) => n, (a,b) => a + b)
+export function add(a: number, b: number) {
+    return a + b
+}
+
+export const sumOfSquare = rangeMapReduce(100, (n) => n ** 2, add)
+export const sum = rangeMapReduce(100, (n) => n, add)
 export const squareOfSum = sum ** 2
 
-export const problem6Result =  squareOfSum - sumOfSquare
+export const problem6Result = squareOfSum - sumOfSquare
