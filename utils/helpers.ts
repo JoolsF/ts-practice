@@ -10,11 +10,17 @@ export function* lazyRange(start: number, end: number): Generator<number> {
     }
 }
 
-export function rangeMap(end: number, f:(n: number) => number): number[] {
-   return Array.from({length: end}).map((_,n) => f(n+1))
+export function rangeMap(end: number, f: (n: number) => number): number[] {
+    return Array.from({ length: end }).map((_, n) => f(n + 1))
 }
 
-export function rangeMapReduce(end: number, f:(n: number) => number, r: (a: number,b: number) => number): number {
-    const res1 = Array.from({length: end}).map((_,n) => f(n+1))
+export function rangeMapReduce(end: number, f: (n: number) => number, r: (a: number, b: number) => number): number {
+    const res1 = Array.from({ length: end }).map((_, n) => f(n + 1))
     return res1.reduce(r)
- }
+}
+
+export const nextNumberGenerator = ((start: number) => {
+    let i = start
+    return () => i++
+}
+)

@@ -11,7 +11,7 @@ Find the difference between the sum of the squares of the first one hundred natu
 
 */
 
-import { rangeMapReduce } from "../../utils/helpers";
+import { lazyRange, nextNumberGenerator, rangeMapReduce } from "../../utils/helpers";
 import { nextPrimeGenerator } from "./euler-1-5";
 
 export function add(a: number, b: number) {
@@ -78,20 +78,62 @@ let res8: { product: number, digits: number[] } = {
     digits: []
 }
 function checkProduct(digits: number[]) {
-    console.log(digits)
     const product = digits.reduce((a, b) => a * b)
     if (product > res8.product) {
         res8 = {
             digits,
             product
         }
-        console.log(product)
+        // console.log(product)
     }
 }
 
 for (let i = 0; i <= numDigits.length - 13; i++) {
 
-checkProduct(numDigits.slice(i, i + 13))
+    checkProduct(numDigits.slice(i, i + 13))
 }
 
 export const problem8Result = res8
+
+/*
+ Problem 9
+  A Pythagorean triplet is a set of three natural numbers, a < b < c, for which,
+   
+  a*a + b*b = c*c
+
+ For example 3*3 + 4*4 = 9 + 16 = 25 = 5*5
+
+ There exists exactly one Pythagorean triplet for which a + b + c = 1000.
+ Find the product abc
+*/
+
+
+/*
+    |   a   |   b   |   c   |
+        1       2       3
+                        4
+                        ...
+                        n   (where aa + bb + cc > 1000)
+                3       4   (increment b)
+                3       5   (increment b)
+                3       ...
+                        n
+                4           (once b is too large for first iteration, increment a)
+               ...            
+        2       3       4
+                        5
+                        ...
+                        N
+    
+
+*/
+const expectedRes = 1000
+let currentRes = 0
+const nextNumber = nextNumberGenerator(0)
+
+// while (expectedRes != currentRes) {
+//     const a = nextNumber()
+    
+// }
+
+export const problem9Result = 1

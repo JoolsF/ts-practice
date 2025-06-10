@@ -1,4 +1,4 @@
-import { problem6Result, problem7Result, problem8Result } from "./euler-6-10";
+import { problem6Result, problem7Result, problem8Result, problem9Result } from "./euler-6-10";
 
 
 // console.log(`Problem 1 result ${problem1Result}`)
@@ -10,4 +10,5 @@ import { problem6Result, problem7Result, problem8Result } from "./euler-6-10";
 // console.log(`Problem 5 result: ${JSON.stringify(problem5Result)}`); 
 // console.log(`Problem 6 result: ${problem6Result}`); 
 // console.log(`Problem 7 result: ${problem7Result}`); 
-console.log(`Problem 8 result: ${JSON.stringify(problem8Result)}`); 
+// console.log(`Problem 8 result: ${JSON.stringify(problem8Result)}`); 
+console.log(`Problem 9 result: ${JSON.stringify(problem9Result)}`); 
