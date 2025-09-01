@@ -153,3 +153,33 @@ const cache2: {[id: string]: string} = {}
 cache['b'] = 'BBB'
 
 console.log(cache['b']) // BBB
+
+
+/*
+  Narrowing union types with typeof
+*/
+
+// Narrowing union types
+const coerceAmount = (amount: number | { amount: number }) => {
+  if (typeof amount === 'number') {
+    return amount
+  }
+  return amount.amount
+
+};
+
+/*
+  Typing errors
+*/
+
+const tryCatchDemo = (state: "fail" | "succeed") => {
+  try {
+    if (state === "fail") {
+      throw new Error("Failure!");
+    }
+  } catch (e) {
+    if(e instanceof Error) { // Use instaneof to check at runtime what the type is
+      return e.message
+    }
+  }
+};

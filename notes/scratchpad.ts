@@ -1,18 +1,17 @@
-/*
-  Record type
-*/
+import { expect, it } from "vitest";
 
-// Allows us to pass any number of dynamic keys to that object at runtime.
-const cache: Record<string, string> = {}
+const tryCatchDemo = (state: "fail" | "succeed") => {
+  try {
+    if (state === "fail") {
+      throw new Error("Failure!");
+    }
+  } catch (e) {
+    if(e instanceof Error) {
+      return e.message
+    }
+  }
+};
 
-cache['a'] = 'AAA'
-
-console.log(cache['a']) // AAA
-
-// this is the same
-
-const cache2: {[id: string]: string} = {}
-
-cache['b'] = 'BBB'
-
-console.log(cache['b']) // BBB
+it("Should return the message when it fails", () => {
+  expect(tryCatchDemo("fail")).toEqual("Failure!");
+});
