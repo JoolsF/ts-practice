@@ -133,3 +133,23 @@ function* lazyRange(start: number, end: number): Generator<number> {
 }
 
 const res = Array.from( {length: 5}, (_, n) => n ** n)
+
+
+/*
+  Record type
+*/
+
+// Allows us to pass any number of dynamic keys to that object at runtime.
+const cache: Record<string, string> = {}
+
+cache['a'] = 'AAA'
+
+console.log(cache['a']) // AAA
+
+// this is the same, 'index signature inside a type'
+
+const cache2: {[id: string]: string} = {}
+
+cache['b'] = 'BBB'
+
+console.log(cache['b']) // BBB

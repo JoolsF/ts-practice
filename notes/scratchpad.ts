@@ -1,14 +1,18 @@
-const a = {
-  id: { S: "PAYMENT_ID" },
-  entityType: { S: "PAYMENT" },
-  sortKey: { S: "PAYMENT#SERVICE#EXTERNAL_ID#OTHER" },
-  accountId: { S: "ACCOUNT_ID" },
-  paymentDisplayIdentification: {
-    M: {
-      value: { S: "ID_VALUE" },
-      description: { S: "ID_DESC" },
-    }
-  }
-}
+/*
+  Record type
+*/
 
-console.log(a.sortKey?.S!.startsWith('PAYMENT'))
+// Allows us to pass any number of dynamic keys to that object at runtime.
+const cache: Record<string, string> = {}
+
+cache['a'] = 'AAA'
+
+console.log(cache['a']) // AAA
+
+// this is the same
+
+const cache2: {[id: string]: string} = {}
+
+cache['b'] = 'BBB'
+
+console.log(cache['b']) // BBB
