@@ -183,3 +183,18 @@ const tryCatchDemo = (state: "fail" | "succeed") => {
     }
   }
 };
+
+
+/*
+ Pick
+*/
+
+type Foo = {
+  a: string
+  b: string
+  c: number
+}
+
+type Foo2 = Pick<Foo, 'a'>
+
+const f: Foo2 = {a: 'a'}

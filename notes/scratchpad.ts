@@ -1,17 +1,8 @@
-import { expect, it } from "vitest";
+type Foo = {
+  a: string
+  b: string
+  c: number
+}
 
-const tryCatchDemo = (state: "fail" | "succeed") => {
-  try {
-    if (state === "fail") {
-      throw new Error("Failure!");
-    }
-  } catch (e) {
-    if(e instanceof Error) {
-      return e.message
-    }
-  }
-};
+type Foo2 = Pick<Foo, 'a'>
 
-it("Should return the message when it fails", () => {
-  expect(tryCatchDemo("fail")).toEqual("Failure!");
-});
