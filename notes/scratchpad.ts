@@ -1,8 +1,8 @@
 type Foo = {
-  a: string
-  b: string
-  c: number
+    a: string
+    b?: string = 's'
 }
 
-type Foo2 = Pick<Foo, 'a'>
-
+function f(foo: Foo) {
+    console.log(foo)
+}

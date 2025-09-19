@@ -1,4 +1,4 @@
-export {};  // Turn a file with any imports or exports into a module
+export { };  // Turn a file with any imports or exports into a module
 
 /*
     Depedency Injection using classes
@@ -128,11 +128,11 @@ log(`myObj after`, arr); // ["1"]
  */
 function* lazyRange(start: number, end: number): Generator<number> {
   for (let i = start; i <= end; i++) {
-      yield i;
+    yield i;
   }
 }
 
-const res = Array.from( {length: 5}, (_, n) => n ** n)
+const res = Array.from({ length: 5 }, (_, n) => n ** n)
 
 
 /*
@@ -148,7 +148,7 @@ console.log(cache['a']) // AAA
 
 // this is the same, 'index signature inside a type'
 
-const cache2: {[id: string]: string} = {}
+const cache2: { [id: string]: string } = {}
 
 cache['b'] = 'BBB'
 
@@ -178,7 +178,7 @@ const tryCatchDemo = (state: "fail" | "succeed") => {
       throw new Error("Failure!");
     }
   } catch (e) {
-    if(e instanceof Error) { // Use instaneof to check at runtime what the type is
+    if (e instanceof Error) { // Use instaneof to check at runtime what the type is
       return e.message
     }
   }
@@ -197,4 +197,23 @@ type Foo = {
 
 type Foo2 = Pick<Foo, 'a'>
 
-const f: Foo2 = {a: 'a'}
+const f: Foo2 = { a: 'a' }
+
+/*
+  Remove properties from an instance
+*/
+
+type Foobar = {
+  bar: string;
+  baz: number;
+}
+
+const abc: Foobar = {
+  bar: 'hello',
+  baz: 42,
+}
+
+const {bar: _, ...a} = abc
+const {baz: __, ...b} = abc
+console.log(a) // {baz: 42}
+console.log(b) // {bar: 'hello'}

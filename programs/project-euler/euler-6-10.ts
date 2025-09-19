@@ -129,11 +129,14 @@ export const problem8Result = res8
 */
 const expectedRes = 1000
 let currentRes = 0
-const nextNumber = nextNumberGenerator(0)
+for (let a = 1; a <= expectedRes; a++) {
+    for (let b = a + 1; b <= expectedRes; b++) {
+        const c = expectedRes - a - b;
+        if (c > b && (a * a + b * b === c * c)) {
+            currentRes = a * b * c
+            break;
+        }
+    }
+}
 
-// while (expectedRes != currentRes) {
-//     const a = nextNumber()
-    
-// }
-
-export const problem9Result = 1
+export const problem9Result = currentRes
